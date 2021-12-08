@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableAutoConfiguration
 @SpringBootApplication
-public class WhereApplication {
+public class Main {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WhereApplication.class, args);
+		SpringApplication.run(Main.class, args);
 	}
 
 }
