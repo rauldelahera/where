@@ -1,29 +1,15 @@
 import React from "react";
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-import { formatRelative } from "date-fns";
+import {GoogleMap, InfoWindow, Marker, useLoadScript,} from "@react-google-maps/api";
+import usePlacesAutocomplete, {getGeocode, getLatLng,} from "use-places-autocomplete";
+import {Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover,} from "@reach/combobox";
+import {formatRelative} from "date-fns";
 
 import "@reach/combobox/styles.css";
 import mapStyles from "../mapStyles";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  height: "90vh",
+  height: "100vh",
   width: "50vw",
 };
 const options = {
@@ -97,7 +83,7 @@ export default function Map() {
               setSelected(marker);
             }}
             icon={{
-              url: `/1.svg`,
+              url: `../static/1.svg`,
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
               scaledSize: new window.google.maps.Size(30, 30),
@@ -144,7 +130,7 @@ function Locate({ panTo }) {
         );
       }}
     >
-      <img src="/2.svg" alt="compass" />
+      <img src='../static/2.svg' alt='compass' />
     </button>
   );
 }
