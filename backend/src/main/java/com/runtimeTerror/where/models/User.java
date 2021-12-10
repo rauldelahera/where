@@ -1,6 +1,7 @@
 package com.runtimeTerror.where.models;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -38,6 +39,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @Size(max = 300)
+    private String userProfileImageLink;
+
     public User() {
     }
 
@@ -45,6 +49,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.userProfileImageLink = null;
     }
 
     public Long getId() {
@@ -85,5 +90,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Optional<String> getUserProfileImageLink() {
+        return Optional.ofNullable(userProfileImageLink);
+    }
+
+    public void setUserProfileImageLink(String filename) {
+        this.userProfileImageLink = filename;
     }
 }
