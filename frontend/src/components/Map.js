@@ -1,16 +1,30 @@
 import React from "react";
-import {GoogleMap, InfoWindow, Marker, useLoadScript,} from "@react-google-maps/api";
-import usePlacesAutocomplete, {getGeocode, getLatLng,} from "use-places-autocomplete";
-import {Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover,} from "@reach/combobox";
-import {formatRelative} from "date-fns";
+import {
+  GoogleMap,
+  InfoWindow,
+  Marker,
+  useLoadScript,
+} from "@react-google-maps/api";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxList,
+  ComboboxOption,
+  ComboboxPopover,
+} from "@reach/combobox";
+import { formatRelative } from "date-fns";
 
 import "@reach/combobox/styles.css";
 import mapStyles from "../mapStyles";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  height: "100vh",
-  width: "50vw",
+  height: "50vh",
+  width: "30vw",
 };
 const options = {
   styles: mapStyles,
@@ -130,7 +144,7 @@ function Locate({ panTo }) {
         );
       }}
     >
-      <img src='../static/2.svg' alt='compass' />
+      <img src="../static/2.svg" alt="compass" />
     </button>
   );
 }
