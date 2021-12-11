@@ -2,11 +2,13 @@
 /* #f7a9e3   Pink */
 /* #f3ed01   Yellow*/
 /* #ccffc4  Green */
+/* #f0f2f5 Grey */
 
 html,
 body {
   background-color: #f0f2f5;
   font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.05rem;
 }
 
 label {
@@ -56,4 +58,43 @@ label {
 
 .navbar-dark .navbar-brand {
   color: white;
+}
+
+/* Log IN */
+.btn-login {
+  color: black;
+  background-color: #ccffc4;
+  border-color: black;
+}
+.btn-login:hover {
+  color: black;
+  background-color: #b2fea7;
+  border-color: black;
+}
+.login {
+  letter-spacing: 0.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.card {
+  border-radius: 3rem;
+}
+
+/* Grid login & Sign up*/
+.col-md-12 {
+  display: grid;
+  grid-template-columns: 0.1fr 2fr 2fr 0.1fr;
+}
+.card {
+  object-fit: cover;
+  grid-column: 3/4;
+}
+.logo {
+  grid-column: 2/3;
+}
+.logo > img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 5rem;
+  padding: 50px 50px;
 }

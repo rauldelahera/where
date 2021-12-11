@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
+import logo from "../img/wdili.jpeg";
 import AuthService from "../services/auth.service";
 
 const required = (value) => {
@@ -67,6 +67,9 @@ const Login = (props) => {
 
   return (
     <div className="col-md-12">
+      <div className="logo">
+        <img src={logo} alt="little man with question mark" />
+      </div>
       <div className="card card-container">
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -100,11 +103,11 @@ const Login = (props) => {
           </div>
 
           <div className="form-group">
-            <button className="btn btn-primary btn-block" disabled={loading}>
+            <button className="btn btn-login btn-block" disabled={loading}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
-              <span>Login</span>
+              <span className="login">Login</span>
             </button>
           </div>
 
