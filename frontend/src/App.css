@@ -10,6 +10,27 @@ body {
   font-family: "Montserrat", sans-serif;
   letter-spacing: 0.05rem;
 }
+/* Scroll bar style */
+html {
+  --scrollbarBG: #f7a9e4;
+  --thumbBG: black;
+}
+body::-webkit-scrollbar {
+  width: 7px;
+}
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 3.5px;
+  border: 2px solid var(--scrollbarBG);
+}
+/* Scroll bar style */
 
 label {
   display: block;
@@ -129,4 +150,42 @@ label {
 .alert {
   padding: 0 1.25rem;
   margin-bottom: 0;
+}
+
+/* Footer */
+.after-footer {
+  min-height: 100vh;
+}
+
+.p-1 {
+  background-color: #ccffc4;
+  width: 100%;
+  height: 12rem;
+  color: black;
+}
+.p-2 {
+  background-color: #c792ff;
+  height: 5rem;
+}
+.footer-images {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+.creator {
+  display: grid;
+  grid-template-columns: 5fr 2fr 2fr 2fr 2fr 5fr;
+  margin: 1rem 1rem;
+}
+.box1 {
+  grid-column: 2/3;
+}
+.made-text {
+  text-transform: capitalize;
+  margin-top: 1rem;
+}
+.makers-logo {
+  width: 80px;
+  margin: 0 1rem;
 }
