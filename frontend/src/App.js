@@ -14,6 +14,7 @@ import BoardAdmin from "./components/BoardAdmin";
 
 // import AuthVerify from "./common/AuthVerify";
 import EventBus from "./common/EventBus";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -114,6 +115,7 @@ const App = () => {
       </div>
 
       {/* <AuthVerify logOut={logOut}/> */}
+      <Footer />
     </div>
   );
 };

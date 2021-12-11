@@ -70,56 +70,54 @@ const Login = (props) => {
       <div className="logo">
         <img src={logo} alt="little man with question mark" />
       </div>
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
-
-        <Form onSubmit={handleLogin} ref={form}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <Input
-              type="text"
-              className="form-control"
-              name="username"
-              value={username}
-              onChange={onChangeUsername}
-              validations={[required]}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <Input
-              type="password"
-              className="form-control"
-              name="password"
-              value={password}
-              onChange={onChangePassword}
-              validations={[required]}
-            />
-          </div>
-
-          <div className="form-group">
-            <button className="btn btn-login btn-block" disabled={loading}>
-              {loading && (
-                <span className="spinner-border spinner-border-sm"></span>
-              )}
-              <span className="login">Login</span>
-            </button>
-          </div>
-
-          {message && (
+      <div className="card ">
+        <div className="card-padding">
+          <Form onSubmit={handleLogin} ref={form}>
             <div className="form-group">
-              <div className="alert alert-danger" role="alert">
-                {message}
-              </div>
+              <label htmlFor="username">Username</label>
+              <Input
+                type="text"
+                className="form-control"
+                name="username"
+                value={username}
+                onChange={onChangeUsername}
+                validations={[required]}
+                placeholder="Type your username here"
+              />
             </div>
-          )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
-        </Form>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <Input
+                type="password"
+                className="form-control"
+                name="password"
+                value={password}
+                onChange={onChangePassword}
+                validations={[required]}
+                placeholder="Type your password here"
+              />
+            </div>
+
+            <div className="form-group">
+              <button className="btn btn-login btn-block" disabled={loading}>
+                {loading && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )}
+                <span className="login">Login</span>
+              </button>
+            </div>
+
+            {message && (
+              <div className="form-group">
+                <div className="alert alert-danger" role="alert">
+                  {message}
+                </div>
+              </div>
+            )}
+            <CheckButton style={{ display: "none" }} ref={checkBtn} />
+          </Form>
+        </div>
       </div>
     </div>
   );
