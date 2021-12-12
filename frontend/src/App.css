@@ -212,8 +212,51 @@ label {
 }
 .form-padding {
   padding: 40px 40px;
-  border: 1px solid black;
+  border: 1px dashed #f7a9e4;
 }
 .map-main {
-  border: 1px solid black;
+  border: 1px dashed #f7a9e4;
+}
+
+.marks {
+  padding-top: 2rem;
+}
+
+/* Home Page */
+.home {
+  display: grid;
+  grid-template-columns: 20fr 1fr 20fr 1fr 20fr;
+  margin-top: 14%;
+}
+.home-1 {
+  grid-column: 1/2;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+  background-color: #f7a9e4;
+  color: #f0f2f5;
+}
+.home-1-inner {
+  padding: 40px 40px;
+}
+.home-2 {
+  grid-column: 3/4;
+}
+.home-2 > img {
+  object-fit: cover;
+  width: 100%;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+}
+.home-3 {
+  grid-column: 5/6;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+  background-color: #f7a9e4;
+  color: #f0f2f5;
+}
+.home-3-inner {
+  padding: 40px 40px;
 }

@@ -16,10 +16,10 @@ export default function Form() {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="form-padding">
+    <div className="form-padding">
+      <form onSubmit={handleSubmit}>
         <label>
-          Enter your name:
+          Enter lng cordinates:
           <input
             type="text"
             name="username"
@@ -28,7 +28,7 @@ export default function Form() {
           />
         </label>
         <label>
-          Enter your age:
+          Enter lat cordinates:
           <input
             type="number"
             name="age"
@@ -38,6 +38,27 @@ export default function Form() {
         </label>
         <input type="submit" />
       </form>
-    </>
+
+      <div className="marks">
+        <ul>
+          <li>
+            {" "}
+            <h5>First Mark:</h5>
+          </li>
+          <li>
+            <h5>Second Mark:</h5>
+          </li>
+          <li>
+            <h5>Third Mark:</h5>
+          </li>
+          <li>
+            <h5>Fourth Mark:</h5>
+          </li>
+          <li>
+            <h5>Fift Mark:</h5>
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 }
