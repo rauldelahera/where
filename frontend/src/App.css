@@ -189,3 +189,31 @@ label {
   width: 80px;
   margin: 0 1rem;
 }
+
+/* Map Style  */
+.map {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 3fr 0.2fr 3fr;
+}
+.see-form {
+  grid-column: 1/2;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 5rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+  padding: 40px 40px;
+}
+.see-map {
+  grid-column: 3/4;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 5rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+  padding: 40px 40px;
+}
+.form-padding {
+  padding: 40px 40px;
+  border: 1px solid black;
+}
+.map-main {
+  border: 1px solid black;
+}

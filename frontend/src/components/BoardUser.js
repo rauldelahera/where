@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
-
+import Map from "../components/Map";
+import Form from "../components/Form";
 const BoardUser = () => {
   const [content, setContent] = useState("");
 
@@ -29,10 +30,16 @@ const BoardUser = () => {
   }, []);
 
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
+    <div className="map">
+      {/* <header className="jumbotron">
+        <h3>{content}</h3> 
+      </header> */}
+      <div className="see-form">
+        <Form />
+      </div>
+      <div className="see-map">
+        <Map />
+      </div>
     </div>
   );
 };

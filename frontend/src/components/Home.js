@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import UserService from "../services/user.service";
-import Map from "./Map";
 
 const Home = () => {
   const [content, setContent] = useState("");
@@ -26,7 +25,6 @@ const Home = () => {
     <div className="container">
       <header className="jumbotron">
         <h3>{content}</h3>
-        <Map />
       </header>
     </div>
   );

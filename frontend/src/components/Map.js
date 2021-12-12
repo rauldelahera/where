@@ -20,11 +20,12 @@ import { formatRelative } from "date-fns";
 
 import "@reach/combobox/styles.css";
 import mapStyles from "../mapStyles";
+import compas from "../img/2.svg";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  height: "50vh",
-  width: "30vw",
+  height: "73vh",
+  width: "40vw",
 };
 const options = {
   styles: mapStyles,
@@ -69,16 +70,16 @@ export default function Map() {
   if (!isLoaded) return "Loading...";
 
   return (
-    <div className="map">
-      <h1 className="logo_name">
+    <div className="map-main">
+      {/* <h1 className="logo_name">
         Where?{" "}
         <span role="img" aria-label="tent">
           🐘
         </span>
-      </h1>
+      </h1> */}
 
-      <Locate panTo={panTo} />
-      <Search panTo={panTo} />
+      {/* <Locate panTo={panTo} />
+      <Search panTo={panTo} /> */}
 
       <GoogleMap
         id="map"
@@ -96,12 +97,12 @@ export default function Map() {
             onClick={() => {
               setSelected(marker);
             }}
-            icon={{
-              url: `../static/1.svg`,
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-              scaledSize: new window.google.maps.Size(30, 30),
-            }}
+            // icon={{
+            //   url: `../img/bear.svg`,
+            //   origin: new window.google.maps.Point(0, 0),
+            //   anchor: new window.google.maps.Point(15, 15),
+            //   scaledSize: new window.google.maps.Size(30, 30),
+            // }}
           />
         ))}
 
@@ -144,7 +145,7 @@ function Locate({ panTo }) {
         );
       }}
     >
-      <img src="../static/2.svg" alt="compass" />
+      <img src={compas} alt="compass" />
     </button>
   );
 }
