@@ -31,9 +31,9 @@ const BoardUser = () => {
 
   return (
     <div className="map">
-      {/* <header className="jumbotron">
-        <h3>{content}</h3> 
-      </header> */}
+      <header className="jumbotron map-hide">
+        <h3>{content}</h3>
+      </header>
       <div className="see-form">
         <Form />
       </div>

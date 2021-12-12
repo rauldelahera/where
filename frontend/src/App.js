@@ -46,7 +46,7 @@ const App = () => {
   return (
     <>
       <div className="after-footer">
-        <nav className="navbar navbar-expand navbar-dark navbar-test">
+        <nav className="navbar navbar-expand navbar-dark navbar-test ">
           <Link to={"/"} className="navbar-brand">
             WDILI
           </Link>

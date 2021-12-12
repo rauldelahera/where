@@ -21,9 +21,9 @@ export default function Form() {
         <label>
           Enter lng cordinates:
           <input
-            type="text"
-            name="username"
-            value={inputs.username || ""}
+            type="number"
+            name="lng"
+            value={inputs.lng || ""}
             onChange={handleChange}
           />
         </label>
@@ -31,8 +31,17 @@ export default function Form() {
           Enter lat cordinates:
           <input
             type="number"
-            name="age"
-            value={inputs.age || ""}
+            name="lat"
+            value={inputs.lat || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Add title to your mark:
+          <input
+            type="text"
+            name="title"
+            value={inputs.title || ""}
             onChange={handleChange}
           />
         </label>

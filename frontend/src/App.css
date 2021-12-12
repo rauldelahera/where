@@ -158,13 +158,13 @@ label {
 }
 
 .p-1 {
-  background-color: #ccffc4;
+  background-color: #e5e4e2;
   width: 100%;
   height: 12rem;
   color: black;
 }
 .p-2 {
-  background-color: #c792ff;
+  background-color: #c4b454;
   height: 5rem;
 }
 .footer-images {
@@ -191,6 +191,9 @@ label {
 }
 
 /* Map Style  */
+.map-hide {
+  display: none;
+}
 .map {
   margin-top: 2rem;
   display: grid;
@@ -228,6 +231,9 @@ label {
   grid-template-columns: 20fr 1fr 20fr 1fr 20fr;
   margin-top: 14%;
 }
+.home-hide {
+  display: none;
+}
 .home-1 {
   grid-column: 1/2;
   box-shadow: 10px 10px 5px #aaaaaa81;
@@ -259,4 +265,30 @@ label {
 }
 .home-3-inner {
   padding: 40px 40px;
+}
+
+/* Profile Page */
+.jumbotron {
+  padding: 1rem 1rem;
+}
+.profile {
+  display: grid;
+  grid-template-columns: 25fr 2fr 25fr;
+}
+.profile-1 {
+  grid-column: 1/2;
+  padding: 40px 40px;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+}
+.profile-2 {
+  grid-column: 3/4;
+}
+.profile-2 > img {
+  object-fit: cover;
+  width: 100%;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
 }
