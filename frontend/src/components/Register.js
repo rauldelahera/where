@@ -4,6 +4,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
 import isEmail from "validator/es/lib/isEmail";
+import logo from "../img/wdili.jpeg";
 
 const required = (value) => {
   if (!value) {
@@ -100,75 +101,82 @@ const Register = (props) => {
   };
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
+    <>
+      <div className="col-md-12">
+        <div className="logo">
+          <img src={logo} alt="little man with question mark" />
+        </div>
 
-        <Form onSubmit={handleRegister} ref={form}>
-          {!successful && (
-            <div>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <Input
-                  type="text"
-                  className="form-control"
-                  name="username"
-                  value={username}
-                  onChange={onChangeUsername}
-                  validations={[required, vusername]}
-                />
-              </div>
+        <div className="card ">
+          <div className="card-padding">
+            <Form onSubmit={handleRegister} ref={form}>
+              {!successful && (
+                <div>
+                  <div className="form-group">
+                    <label htmlFor="username">Username</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="username"
+                      value={username}
+                      onChange={onChangeUsername}
+                      validations={[required, vusername]}
+                      placeholder="Type your username here"
+                    />
+                  </div>
 
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <Input
-                  type="text"
-                  className="form-control"
-                  name="email"
-                  value={email}
-                  onChange={onChangeEmail}
-                  validations={[required, validEmail]}
-                />
-              </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="email"
+                      value={email}
+                      onChange={onChangeEmail}
+                      validations={[required, validEmail]}
+                      placeholder="Type your email here"
+                    />
+                  </div>
 
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <Input
-                  type="password"
-                  className="form-control"
-                  name="password"
-                  value={password}
-                  onChange={onChangePassword}
-                  validations={[required, vpassword]}
-                />
-              </div>
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <Input
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      value={password}
+                      onChange={onChangePassword}
+                      validations={[required, vpassword]}
+                      placeholder="Type your password here"
+                    />
+                  </div>
 
-              <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
-              </div>
-            </div>
-          )}
+                  <div className="form-group">
+                    <button className="btn btn-login btn-block login">
+                      Sign Up
+                    </button>
+                  </div>
+                </div>
+              )}
 
-          {message && (
-            <div className="form-group">
-              <div
-                className={
-                  successful ? "alert alert-success" : "alert alert-danger"
-                }
-                role="alert"
-              >
-                {message}
-              </div>
-            </div>
-          )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
-        </Form>
+              {message && (
+                <div className="form-group">
+                  <div
+                    className={
+                      successful ? "alert alert-success" : "alert alert-danger"
+                    }
+                    role="alert"
+                  >
+                    {message}
+                  </div>
+                </div>
+              )}
+              <CheckButton style={{ display: "none" }} ref={checkBtn} />
+            </Form>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

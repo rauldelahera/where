@@ -1,3 +1,37 @@
+/* Main colors  */
+/* #f7a9e4   Pink */
+/* #f3ed01   Yellow*/
+/* #ccffc4  Green */
+/* #f0f2f5 Grey */
+
+html,
+body {
+  background-color: #f0f2f5;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.05rem;
+}
+/* Scroll bar style */
+html {
+  --scrollbarBG: #f7a9e4;
+  --thumbBG: black;
+}
+body::-webkit-scrollbar {
+  width: 7px;
+}
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 3.5px;
+  border: 2px solid var(--scrollbarBG);
+}
+/* Scroll bar style */
+
 label {
   display: block;
   margin-top: 10px;
@@ -29,4 +63,232 @@ label {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+
+/* Nav Bar */
+.navbar-test {
+  background-color: #f7a9e4;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: black;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+}
+
+.navbar-dark .navbar-brand {
+  color: white;
+}
+
+/* Log IN */
+.btn-login {
+  color: black;
+  background-color: #f3ed01;
+  border-color: none;
+  margin-top: 2rem;
+}
+.btn-login:hover {
+  color: black;
+  background-color: #f3ef01c0;
+  border-color: rgba(0, 0, 0, 0.711);
+}
+.login {
+  letter-spacing: 0.15rem;
+  font-weight: 900;
+  font-size: large;
+  text-transform: uppercase;
+}
+.card {
+  border-radius: 5rem;
+  margin: 0;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+  padding: 50px 50px;
+  background-color: #f0f2f5;
+}
+
+.card-padding {
+  border-radius: 2rem;
+  padding: 40px 40px;
+  background-color: #f7a9e4;
+  letter-spacing: 0.19rem;
+  font-weight: 700;
+  color: #f3ed01;
+  text-transform: uppercase;
+}
+
+/* Grid login & Sign up*/
+.col-md-12 {
+  margin-top: 5rem;
+  display: grid;
+  grid-template-columns: 3fr 0.2fr 3fr;
+}
+.card {
+  object-fit: cover;
+  grid-column: 3/4;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+}
+.logo {
+  grid-column: 1/2;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 5rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+}
+.logo > img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 5rem;
+  padding: 50px 50px;
+}
+.form-control {
+  background-color: #f0f2f5;
+  border-radius: 0.5rem;
+}
+.alert-danger {
+  font-size: 0.7rem;
+}
+.alert {
+  padding: 0 1.25rem;
+  margin-bottom: 0;
+}
+
+/* Footer */
+.after-footer {
+  min-height: 100vh;
+}
+
+.p-1 {
+  background-color: #e5e4e2;
+  width: 100%;
+  height: 12rem;
+  color: black;
+}
+.p-2 {
+  background-color: #c4b454;
+  height: 5rem;
+}
+.footer-images {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+.creator {
+  display: grid;
+  grid-template-columns: 5fr 2fr 2fr 2fr 2fr 5fr;
+  margin: 1rem 1rem;
+}
+.box1 {
+  grid-column: 2/3;
+}
+.made-text {
+  text-transform: capitalize;
+  margin-top: 1rem;
+}
+.makers-logo {
+  width: 80px;
+  margin: 0 1rem;
+}
+
+/* Map Style  */
+.map-hide {
+  display: none;
+}
+.map {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 3fr 0.2fr 3fr;
+}
+.see-form {
+  grid-column: 1/2;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 5rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+  padding: 40px 40px;
+}
+.see-map {
+  grid-column: 3/4;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 5rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+  padding: 40px 40px;
+}
+.form-padding {
+  padding: 40px 40px;
+  border: 1px dashed #f7a9e4;
+}
+.map-main {
+  border: 1px dashed #f7a9e4;
+}
+
+.marks {
+  padding-top: 2rem;
+}
+
+/* Home Page */
+.home {
+  display: grid;
+  grid-template-columns: 20fr 1fr 20fr 1fr 20fr;
+  margin-top: 14%;
+}
+.home-hide {
+  display: none;
+}
+.home-1 {
+  grid-column: 1/2;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+  background-color: #f7a9e4;
+  color: #f0f2f5;
+}
+.home-1-inner {
+  padding: 40px 40px;
+}
+.home-2 {
+  grid-column: 3/4;
+}
+.home-2 > img {
+  object-fit: cover;
+  width: 100%;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+}
+.home-3 {
+  grid-column: 5/6;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+  background-color: #f7a9e4;
+  color: #f0f2f5;
+}
+.home-3-inner {
+  padding: 40px 40px;
+}
+
+/* Profile Page */
+.jumbotron {
+  padding: 1rem 1rem;
+}
+.profile {
+  display: grid;
+  grid-template-columns: 25fr 2fr 25fr;
+}
+.profile-1 {
+  grid-column: 1/2;
+  padding: 40px 40px;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
+}
+.profile-2 {
+  grid-column: 3/4;
+}
+.profile-2 > img {
+  object-fit: cover;
+  width: 100%;
+  box-shadow: 10px 10px 5px #aaaaaa81;
+  border-radius: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.163);
 }
