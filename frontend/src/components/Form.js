@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-
+import locationServices from "../services/location.service";
 export default function Form() {
   const [inputs, setInputs] = useState({});
 
@@ -10,9 +10,15 @@ export default function Form() {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
+  let titleAfterState = inputs.title;
+  let lngAfterState = parseFloat(inputs.lng);
+  let latAfterState = parseFloat(inputs.lat);
+  console.log(titleAfterState, lngAfterState, latAfterState);
+
+  locationServices(titleAfterState, latAfterState, lngAfterState);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputs);
   };
 
   return (
