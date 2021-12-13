@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   GoogleMap,
   InfoWindow,
@@ -20,6 +20,7 @@ import { formatRelative } from "date-fns";
 
 import "@reach/combobox/styles.css";
 import mapStyles from "../mapStyles";
+
 // import compas from "../img/2.svg";
 
 const libraries = ["places"];
@@ -38,6 +39,36 @@ const center = {
 };
 
 export default function Map() {
+  // Setting current possition start
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+  const [status, setStatus] = useState(null);
+
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus("Geolocation is not supported by your browser");
+    } else {
+      setStatus("Locating...");
+      navigator.geolocation.watchPosition(
+        (position) => {
+          setStatus(null);
+          setLat(position.coords.latitude);
+          setLng(position.coords.longitude);
+        },
+        () => {
+          setStatus("Unable to retrieve your location");
+        }
+      );
+    }
+  };
+
+  const centerCurrnet = {
+    lat: lat,
+    lng: lng,
+  };
+  console.log(centerCurrnet);
+
+  // Setting current possition end
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -61,10 +92,10 @@ export default function Map() {
     mapRef.current = map;
   }, []);
 
-  // const panTo = React.useCallback(({ lat, lng }) => {
-  //   mapRef.current.panTo({ lat, lng });
-  //   mapRef.current.setZoom(14);
-  // }, []);
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
 
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
@@ -78,18 +109,24 @@ export default function Map() {
         </span>
       </h1> */}
 
-      {/* <Locate panTo={panTo} />
-      <Search panTo={panTo} /> */}
+      {/* <Locate panTo={panTo} /> */}
+      {/* <Search panTo={panTo} />  */}
 
       <GoogleMap
         id="map"
         mapContainerStyle={mapContainerStyle}
         zoom={14}
-        center={center}
         options={options}
         onClick={onMapClick}
         onLoad={onMapLoad}
+        onLoad={getLocation}
+        center={centerCurrnet}
       >
+        <Marker
+          icon="https://www.robotwoods.com/dev/misc/bluecircle.png"
+          position={centerCurrnet}
+        />
+
         {markers.map((marker) => (
           <Marker
             key={`${marker.lat}-${marker.lng}`}
@@ -125,6 +162,8 @@ export default function Map() {
           </InfoWindow>
         ) : null}
       </GoogleMap>
+      <p>{status}</p>
+      <button onClick={getLocation}>Get my location</button>
     </div>
   );
 }
