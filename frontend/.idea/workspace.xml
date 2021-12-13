@@ -1,38 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a255486c-96ca-4a3e-bb49-b766c13c9e93" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/2679948.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Form.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Map.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/mapStyles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/static/2.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BoardModerator.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="a255486c-96ca-4a3e-bb49-b766c13c9e93" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2233nISybl4M1rIUMDGaH0sBwep" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -67,6 +49,8 @@
       <updated>1639052610067</updated>
       <workItem from="1639052612320" duration="5289000" />
       <workItem from="1639059231122" duration="4801000" />
+      <workItem from="1639392776484" duration="285000" />
+      <workItem from="1639393326638" duration="159000" />
     </task>
     <servers />
   </component>
