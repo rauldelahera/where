@@ -1,39 +1,35 @@
-import React, { useState, useEffect } from "react";
-import AuthService from "../services/auth.service";
-import axios from "axios";
-import addingObject from "../services/object.service";
+import React from "react";
+import ReactDOM from "react-dom";
+import { useForm } from "react-hook-form";
 import addingObjects from "../services/object.service";
 
+import "../formstyle.css";
+
 export default function ObjectForm() {
-    const [inputs, setInputs] = useState({});
-  
-    const handleChange = (event) => {
-      const name = event.target.name;
-      const value = event.target.value;
-      setInputs((values) => ({ ...values, [name]: value }));
+    const { register, handleSubmit, setValue } = useForm();
+    
+    const onSubmit = (data) => {
+        let objectName = data.objectName;
+        console.log(objectName);
+        let objectType = data.objectType;
+        console.log(objectType);
+      addingObjects(objectName, objectType);
     };
   
-    let objectNameAfterState = inputs.objectName;
-    let objectTypeAfterState = inputs.objectType;
-    console.log(objectNameAfterState, objectTypeAfterState);
-  
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      addingObjects(objectNameAfterState, objectTypeAfterState);
-      setInputs({});
-    };
     return (
-        <div className="form-padding">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="objectName">name your object.</label>
-          <input
-            type="text"
-            name="objectName"
-            value={inputs.objectName || ""}
-            onChange={handleChange}
-          />
-          <input type="submit" />
-        </form>
-        </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="objectName">object name.</label>
+        <input placeholder="Enter a memorable name" {...register("objectName")} />
+  
+        <label>object type.</label>
+        <select {...register("objectType")}>
+          <option value="car">car.</option>
+          <option value="bike">bike.</option>
+          <option value="tent">tent.</option>
+          <option value="other">other.</option>
+        </select>
+  
+        <input type="submit" />
+      </form>
       );
     }

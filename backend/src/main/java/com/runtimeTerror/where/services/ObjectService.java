@@ -13,7 +13,8 @@ public class ObjectService {
     @Autowired
     ObjectRepository objectRepository;
 
-    public void saveObject(Object object) {
+    public void saveObject(String username, Object object) {
+        object.setUsername(username);
         objectRepository.save(object);
     }
 

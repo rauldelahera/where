@@ -10,11 +10,18 @@ const addingObjects = (objectName, objectType) => {
   return axios.post(
     API_URL + currentUser.username + "/add",
     {
-      objectName,
-      objectType,
+      objectName, 
+      objectType
     },
     { headers: authHeader() }
   );
 };
+
+const getObjects = () => {
+  return axios.get(
+    API_URL + currentUser.username + "/get",
+    { headers: authHeader() }
+  )
+}
 
 export default addingObjects;

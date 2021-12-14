@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import addingLocation from "../services/location.service";
 export default function Form() {
+  const [objects, getObjects] = useState([]);
   const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
@@ -20,6 +21,19 @@ export default function Form() {
     addingLocation(titleAfterState, latAfterState, lngAfterState);
     setInputs({});
   };
+
+  const fetchProducts = async () => {
+    const { data } = await Axios.get(
+      "https://jsonplaceholder.typicode.com/todos/"
+    );
+    const products = data;
+    setProducts(products);
+    console.log(products);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <div className="form-padding">
