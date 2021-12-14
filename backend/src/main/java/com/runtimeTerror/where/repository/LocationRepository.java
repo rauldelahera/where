@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface LocationRepository extends JpaRepository<Location, Long> {
 
-    List<Location> findByUsername(String username);
+    List<Location> findByUsernameAndObjectName(String username, String objectName);
+
+//    List<Location> findByUsername(String username);
 }

@@ -54,7 +54,6 @@ export default function Map() {
     lat: lat,
     lng: lng,
   };
-  console.log(centerCurrnet);
 
   // Setting current possition end
   const { isLoaded, loadError } = useLoadScript({
@@ -89,51 +88,70 @@ export default function Map() {
   if (!isLoaded) return "Loading...";
 
   return (
-    <div className="map-main">
-
-      <GoogleMap
-        id="map"
-        mapContainerStyle={mapContainerStyle}
-        zoom={14}
-        options={options}
-        onClick={onMapClick}
-        onLoad={onMapLoad}
-        onLoad={getLocation}
-        center={centerCurrnet}
-      >
-        <Marker
-          icon="https://www.robotwoods.com/dev/misc/bluecircle.png"
-          position={centerCurrnet}
-        />
-
-        {markers.map((marker) => (
-          <Marker
-            key={`${marker.lat}-${marker.lng}`}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}
-          />
-        ))}
-
-        {selected ? (
-          <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div>
-              <h2>
-                Alert
-              </h2>
-              <p>Item Left {formatRelative(selected.time, new Date())}</p>
-            </div>
-          </InfoWindow>
-        ) : null}
-      </GoogleMap>
+    <>
       <p>{status}</p>
-      <button onClick={getLocation}>Get my location</button>
-    </div>
+      <div className="map-main">
+        {/* <h1 className="logo_name">
+        Where?{" "}
+        <span role="img" aria-label="tent">
+          🐘
+        </span>
+      </h1> */}
+
+        {/* <Locate panTo={panTo} /> */}
+        {/* <Search panTo={panTo} />  */}
+
+        <GoogleMap
+          id="map"
+          mapContainerStyle={mapContainerStyle}
+          zoom={14}
+          options={options}
+          onClick={onMapClick}
+          onLoad={onMapLoad}
+          onLoad={getLocation}
+          center={centerCurrnet}
+        >
+          <Marker
+            icon="https://www.robotwoods.com/dev/misc/bluecircle.png"
+            position={centerCurrnet}
+          />
+
+          {markers.map((marker) => (
+            <Marker
+              key={`${marker.lat}-${marker.lng}`}
+              position={{ lat: marker.lat, lng: marker.lng }}
+              onClick={() => {
+                setSelected(marker);
+              }}
+              // icon={{
+              //   url: `../img/bear.svg`,
+              //   origin: new window.google.maps.Point(0, 0),
+              //   anchor: new window.google.maps.Point(15, 15),
+              //   scaledSize: new window.google.maps.Size(30, 30),
+              // }}
+            />
+          ))}
+
+          {selected ? (
+            <InfoWindow
+              position={{ lat: selected.lat, lng: selected.lng }}
+              onCloseClick={() => {
+                setSelected(null);
+              }}
+            >
+              <div>
+                <h2>
+                  {/* <span role="img" aria-label="bear">
+                  🐘
+                </span>{" "} */}
+                  Alert
+                </h2>
+                <p>Item Left {formatRelative(selected.time, new Date())}</p>
+              </div>
+            </InfoWindow>
+          ) : null}
+        </GoogleMap>
+      </div>
+    </>
   );
               }

@@ -24,4 +24,9 @@ public class LocationService {
         locationRepository.deleteById(location.getId());
     }
 
+//    public Location getLocationData(Location location){
+//        String username = location.getUsername();
+//        return locationRepository.findByUsername(username).get(0);
+//    }
+
 }
