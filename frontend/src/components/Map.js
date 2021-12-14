@@ -21,7 +21,24 @@ import { formatRelative } from "date-fns";
 import "@reach/combobox/styles.css";
 import mapStyles from "../mapStyles";
 
-// import compas from "../img/2.svg";
+// Getting Marks From DB and API START
+import axios from "axios";
+import AuthService from "../services/auth.service";
+import authHeader from "../services/auth-header";
+const currentUser = AuthService.getCurrentUser();
+
+axios
+  .get(`http://localhost:8080/api/location/${currentUser.username}/get`, {
+    headers: authHeader(),
+  })
+  .then((resp) => {
+    console.log("workig", resp.data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+// Getting Marks From DB and API END
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -72,6 +89,7 @@ export default function Map() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
 
