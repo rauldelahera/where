@@ -25,14 +25,12 @@ const options = {
   disableDefaultUI: true,
   zoomControl: true,
 };
-const center = {
-  lat: 51.5007,
-  lng: -0.1246,
-};
 
 export default function Map() {
   // Getting Marks From DB and API START
   const [markers, setMarkers] = React.useState([]);
+  const [selected, setSelected] = React.useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(
@@ -47,15 +45,7 @@ export default function Map() {
     fetchData();
   }, []);
 
-  markers.map((x) => console.log(x.longitude));
-
-  // axios
-  //   .get(`http://localhost:8080/api/location/${currentUser.username}/get`, {
-  //     headers: authHeader(),
-  //   })
-  //   .then((resp) => resp);
-
-  // Getting Marks From DB and API END
+  markers.map((x) => console.log(x.objectName));
 
   // Setting current possition start
   const [lat, setLat] = useState(null);
@@ -114,8 +104,38 @@ export default function Map() {
             <Marker
               position={{ lat: x.latitude, lng: x.longitude }}
               key={x.id}
+              onClick={() => {
+                setSelected(x);
+              }}
             />
           ))}
+          {/* {selected.map((y) => (
+            <InfoWindow
+              position={{ lat: y.latitude, lng: y.longitude }}
+              onCloseClick={() => {
+                setSelected(null);
+              }}
+            >
+              <div>
+                <h4>You left here!</h4>
+                <p>{y.objectName}</p>
+              </div>
+            </InfoWindow>
+          ))} */}
+
+          {selected ? (
+            <InfoWindow
+              position={{ lat: selected.latitude, lng: selected.longitude }}
+              onCloseClick={() => {
+                setSelected(null);
+              }}
+            >
+              <div>
+                <h6>You left here:</h6>
+                <p>{selected.objectName}</p>
+              </div>
+            </InfoWindow>
+          ) : null}
         </GoogleMap>
       </div>
     </>
