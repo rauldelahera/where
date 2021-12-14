@@ -13,7 +13,6 @@ export default function Form() {
   let titleAfterState = inputs.title;
   let lngAfterState = parseFloat(inputs.lng);
   let latAfterState = parseFloat(inputs.lat);
-  console.log(titleAfterState, lngAfterState, latAfterState);
 
   const handleSubmit = (event) => {
     event.preventDefault();

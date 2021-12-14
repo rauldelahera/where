@@ -5,19 +5,6 @@ import {
   Marker,
   useLoadScript,
 } from "@react-google-maps/api";
-// import usePlacesAutocomplete, {
-//   getGeocode,
-//   getLatLng,
-// } from "use-places-autocomplete";
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxList,
-//   ComboboxOption,
-//   ComboboxPopover,
-// } from "@reach/combobox";
-import { formatRelative } from "date-fns";
-
 import "@reach/combobox/styles.css";
 import mapStyles from "../mapStyles";
 
@@ -26,19 +13,6 @@ import axios from "axios";
 import AuthService from "../services/auth.service";
 import authHeader from "../services/auth-header";
 const currentUser = AuthService.getCurrentUser();
-
-axios
-  .get(`http://localhost:8080/api/location/${currentUser.username}/get`, {
-    headers: authHeader(),
-  })
-  .then((resp) => {
-    console.log("workig", resp.data);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
-// Getting Marks From DB and API END
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -56,6 +30,36 @@ const center = {
 };
 
 export default function Map() {
+  // Getting Marks From DB and API START
+  const [markers, setMarkers] = React.useState([]);
+
+  axios
+    .get(`http://localhost:8080/api/location/${currentUser.username}/get`, {
+      headers: authHeader(),
+    })
+    .then((resp) => {
+      let testData = resp.data;
+      console.log(testData.latitude);
+      testData.map((mark) => {
+        let nameFromDb = mark.objectName;
+        console.log(nameFromDb);
+      });
+      // marksBackFormDB.map((mark) => {
+      //   console.log(mark.objectName);
+      //   setMarkers([
+      //     {
+      //       lat: mark.latitude,
+      //       lng: mark.longitude,
+      //     },
+      //   ]);
+      // });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // Getting Marks From DB and API END
+
   // Setting current possition start
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
@@ -90,30 +94,6 @@ export default function Map() {
     libraries,
   });
 
-  const [markers, setMarkers] = React.useState([]);
-  const [selected, setSelected] = React.useState(null);
-
-  const onMapClick = React.useCallback((e) => {
-    setMarkers((current) => [
-      ...current,
-      {
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
-        time: new Date(),
-      },
-    ]);
-  }, []);
-
-  const mapRef = React.useRef();
-  const onMapLoad = React.useCallback((map) => {
-    mapRef.current = map;
-  }, []);
-
-  const panTo = React.useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
-  }, []);
-
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
@@ -121,23 +101,11 @@ export default function Map() {
     <>
       <p>{status}</p>
       <div className="map-main">
-        {/* <h1 className="logo_name">
-        Where?{" "}
-        <span role="img" aria-label="tent">
-          🐘
-        </span>
-      </h1> */}
-
-        {/* <Locate panTo={panTo} /> */}
-        {/* <Search panTo={panTo} />  */}
-
         <GoogleMap
           id="map"
           mapContainerStyle={mapContainerStyle}
           zoom={14}
           options={options}
-          onClick={onMapClick}
-          onLoad={onMapLoad}
           onLoad={getLocation}
           center={centerCurrnet}
         >
@@ -146,118 +114,14 @@ export default function Map() {
             position={centerCurrnet}
           />
 
-          {markers.map((marker) => (
+          {/* {markers.map((marker) => (
             <Marker
-              key={`${marker.lat}-${marker.lng}`}
-              position={{ lat: marker.lat, lng: marker.lng }}
-              onClick={() => {
-                setSelected(marker);
-              }}
-              // icon={{
-              //   url: `../img/bear.svg`,
-              //   origin: new window.google.maps.Point(0, 0),
-              //   anchor: new window.google.maps.Point(15, 15),
-              //   scaledSize: new window.google.maps.Size(30, 30),
-              // }}
+              position={{ lat: marker.latitude, lng: marker.longitude }}
+              key={marker.id}
             />
-          ))}
-
-          {selected ? (
-            <InfoWindow
-              position={{ lat: selected.lat, lng: selected.lng }}
-              onCloseClick={() => {
-                setSelected(null);
-              }}
-            >
-              <div>
-                <h2>
-                  {/* <span role="img" aria-label="bear">
-                  🐘
-                </span>{" "} */}
-                  Alert
-                </h2>
-                <p>Item Left {formatRelative(selected.time, new Date())}</p>
-              </div>
-            </InfoWindow>
-          ) : null}
+          ))} */}
         </GoogleMap>
       </div>
     </>
   );
 }
-
-// function Locate({ panTo }) {
-//   return (
-//     <button
-//       className="locate"
-//       onClick={() => {
-//         navigator.geolocation.getCurrentPosition(
-//           (position) => {
-//             panTo({
-//               lat: position.coords.latitude,
-//               lng: position.coords.longitude,
-//             });
-//           },
-//           () => null
-//         );
-//       }}
-//     >
-//       <img src={compas} alt="compass" />
-//     </button>
-//   );
-// }
-
-// function Search({ panTo }) {
-//   const {
-//     ready,
-//     value,
-//     suggestions: { status, data },
-//     setValue,
-//     clearSuggestions,
-//   } = usePlacesAutocomplete({
-//     requestOptions: {
-//       location: { lat: () => 43.6532, lng: () => -79.3832 },
-//       radius: 100 * 1000,
-//     },
-//   });
-
-//   // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
-
-//   const handleInput = (e) => {
-//     setValue(e.target.value);
-//   };
-
-//   const handleSelect = async (address) => {
-//     setValue(address, false);
-//     clearSuggestions();
-
-//     try {
-//       const results = await getGeocode({ address });
-//       const { lat, lng } = await getLatLng(results[0]);
-//       panTo({ lat, lng });
-//     } catch (error) {
-//       console.log("😱 Error: ", error);
-//     }
-//   };
-
-//   return (
-//     <div className="search">
-//       <Combobox onSelect={handleSelect}>
-//         <ComboboxInput
-//           value={value}
-//           onChange={handleInput}
-//           disabled={!ready}
-//           placeholder="Search your location"
-//         />
-//         <ComboboxPopover>
-//           <ComboboxList>
-//             {status === "OK" &&
-//               data.map(({ id, description }) => (
-//                 <ComboboxOption key={id} value={description} />
-//               ))}
-//           </ComboboxList>
-//         </ComboboxPopover>
-//       </Combobox>
-//     </div>
-//   );
-// }
