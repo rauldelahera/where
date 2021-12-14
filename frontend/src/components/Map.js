@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import {
   GoogleMap,
   InfoWindow,
@@ -32,31 +33,27 @@ const center = {
 export default function Map() {
   // Getting Marks From DB and API START
   const [markers, setMarkers] = React.useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(
+        `http://localhost:8080/api/location/${currentUser.username}/get`,
+        {
+          headers: authHeader(),
+        }
+      );
+      setMarkers(result.data);
+    };
 
-  axios
-    .get(`http://localhost:8080/api/location/${currentUser.username}/get`, {
-      headers: authHeader(),
-    })
-    .then((resp) => {
-      let testData = resp.data;
-      console.log(testData.latitude);
-      testData.map((mark) => {
-        let nameFromDb = mark.objectName;
-        console.log(nameFromDb);
-      });
-      // marksBackFormDB.map((mark) => {
-      //   console.log(mark.objectName);
-      //   setMarkers([
-      //     {
-      //       lat: mark.latitude,
-      //       lng: mark.longitude,
-      //     },
-      //   ]);
-      // });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    fetchData();
+  }, []);
+
+  markers.map((x) => console.log(x.longitude));
+
+  // axios
+  //   .get(`http://localhost:8080/api/location/${currentUser.username}/get`, {
+  //     headers: authHeader(),
+  //   })
+  //   .then((resp) => resp);
 
   // Getting Marks From DB and API END
 
@@ -113,13 +110,12 @@ export default function Map() {
             icon="https://www.robotwoods.com/dev/misc/bluecircle.png"
             position={centerCurrnet}
           />
-
-          {/* {markers.map((marker) => (
+          {markers.map((x) => (
             <Marker
-              position={{ lat: marker.latitude, lng: marker.longitude }}
-              key={marker.id}
+              position={{ lat: x.latitude, lng: x.longitude }}
+              key={x.id}
             />
-          ))} */}
+          ))}
         </GoogleMap>
       </div>
     </>
