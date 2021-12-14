@@ -22,4 +22,10 @@ public class LocationService {
         Location location = locationRepository.findByUsernameAndObjectName(username, objectName).get(0);
         locationRepository.deleteById(location.getId());
     }
+
+//    public Location getLocationData(Location location){
+//        String username = location.getUsername();
+//        return locationRepository.findByUsername(username).get(0);
+//    }
+
 }
