@@ -1,9 +1,13 @@
 package com.runtimeTerror.where.controllers;
 
 import com.runtimeTerror.where.models.Location;
+import com.runtimeTerror.where.models.Object;
 import com.runtimeTerror.where.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -12,6 +16,7 @@ public class LocationController {
 
     @Autowired
     LocationService locationService;
+
 
 
     @PostMapping("{username}/add")

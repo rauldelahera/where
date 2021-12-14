@@ -36,6 +36,23 @@ public class FileUploadService  {
         isImage(file);
         User user = getUserProfile(id);
         Map<String, String> metadata = extractMetaData(file);
+        System.out.println(metadata);
+        String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), user.getId());
+        String filename = String.format("%s-%s", UUID.randomUUID(), file.getOriginalFilename());
+        try {
+            fileStore.save(path, filename, Optional.of(metadata), file.getInputStream());
+            user.setUserProfileImageLink(filename);
+            userRepository.save(user);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public void uploadLocationImage(Long id, MultipartFile file) {
+        isFileEmpty(file);
+        isImage(file);
+        User user = getUserProfile(id);
+        Map<String, String> metadata = extractMetaData(file);
         String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), user.getId());
         String filename = String.format("%s-%s", UUID.randomUUID(), file.getOriginalFilename());
         try {

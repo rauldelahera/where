@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 backend/.env.local
 
+.env.local
 ### STS ###
 .apt_generated
 .classpath
