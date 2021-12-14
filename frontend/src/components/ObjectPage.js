@@ -8,45 +8,16 @@ import EventBus from "../common/EventBus";
 import { useForm } from "react-hook-form";
 import addingObject from "../services/object.service";
 import "../formstyle.css";
+import ObjectForm from "./ObjectForm";
 
 
 const ObjectPage = () => {
   const user = AuthService.getCurrentUser();
 
-//   const createUser = (string) => {
-//     return axios({
-//         method: 'post',
-//         url: "http://localhost:8080/api/object/add",
-//         data: {
-//           string
-//         },
-//         headers: {
-//           'Authorization': `Bearer ${user.accessToken}`
-//         },
-//     })
-// };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm();
-  const onSubmit = (data) => {
-    createUser(data);
-  ;
-  };
-
-
-  // const intialValues = {
-  //   objectName: "",
-  //   objectType: "",
-  //   userName: `${user.username}`
-  // };
-
   return (
     <div className="map">
-      <div className="see-form">
-
+    <div className="see-form">
+    <ObjectForm/>
     </div>
     </div>
   );

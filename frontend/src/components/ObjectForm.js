@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AuthService from "../services/auth.service";
 import axios from "axios";
 import addingObject from "../services/object.service";
+import addingObjects from "../services/object.service";
 
 export default function ObjectForm() {
     const [inputs, setInputs] = useState({});
@@ -12,14 +13,13 @@ export default function ObjectForm() {
       setInputs((values) => ({ ...values, [name]: value }));
     };
   
-    let titleAfterState = inputs.title;
-    let lngAfterState = parseFloat(inputs.lng);
-    let latAfterState = parseFloat(inputs.lat);
-    console.log(titleAfterState, lngAfterState, latAfterState);
+    let objectNameAfterState = inputs.objectName;
+    let objectTypeAfterState = inputs.objectType;
+    console.log(objectNameAfterState, objectTypeAfterState);
   
     const handleSubmit = (event) => {
       event.preventDefault();
-      addingLocation(titleAfterState, latAfterState, lngAfterState);
+      addingObjects(objectNameAfterState, objectTypeAfterState);
       setInputs({});
     };
     return (
@@ -29,45 +29,11 @@ export default function ObjectForm() {
           <input
             type="text"
             name="objectName"
-            value={inputs.lng || ""}
+            value={inputs.objectName || ""}
             onChange={handleChange}
           />
-          <input
-            defaultValue={intialValues.userName}
-            type="hidden"
-            {...register("username")}
-          />
-          <label>type of object.</label>
-          <select {...register("objectType")}>
-            <option value="car">car.</option>
-            <option value="bike">bike.</option>
-            <option value="tent">tent.</option>
-            <option value="other">other.</option>
-          </select>
-
           <input type="submit" />
         </form>
-    
-          <div className="marks">
-            <ul>
-              <li>
-                {" "}
-                <h5>First Mark:</h5>
-              </li>
-              <li>
-                <h5>Second Mark:</h5>
-              </li>
-              <li>
-                <h5>Third Mark:</h5>
-              </li>
-              <li>
-                <h5>Fourth Mark:</h5>
-              </li>
-              <li>
-                <h5>Fift Mark:</h5>
-              </li>
-            </ul>
-          </div>
         </div>
       );
     }

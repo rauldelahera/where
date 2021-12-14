@@ -30,7 +30,7 @@ public class Location {
     @Size(max = 30)
     private Double latitude;
 
-    public Location(String username, String objectName, Double longitude, Double latitude) {
+    public Location(String username, String objectName, Double latitude, Double longitude) {
         this.username = username;
         this.objectName = objectName;
         this.longitude = longitude;

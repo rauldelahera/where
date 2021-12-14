@@ -18,6 +18,10 @@ frontend/.env.development.local
 frontend/.env.test.local
 frontend/.env.production.local
 
+backend/.env.local
+
+backend/src/main/resources/application.properties
+
 frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*

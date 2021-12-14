@@ -13,7 +13,10 @@ public class LocationService {
     LocationRepository locationRepository;
 
 
-    public void saveLocationData(Location location) {
+    public void saveLocationData(String username, Location location) {
+        Location newLocation = new Location(location.getUsername(), location.getObjectName(),
+                location.getLatitude(), location.getLongitude());
+        newLocation.setUsername(username);
         locationRepository.save(location);
     }
 

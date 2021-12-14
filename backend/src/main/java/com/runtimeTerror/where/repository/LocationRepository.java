@@ -9,5 +9,6 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 
     List<Location> findByUsernameAndObjectName(String username, String objectName);
 
-//    List<Location> findByUsername(String username);
+
+    List<Location> findByUsername(String username);
 }

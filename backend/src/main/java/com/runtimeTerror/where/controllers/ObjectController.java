@@ -27,14 +27,16 @@ public class ObjectController {
     }
 
     @PostMapping("{username}/add")
-    public void saveObjectData(@PathVariable("username") String username, @RequestBody String object) {
-        String newString = object.replace("}", "");
-        newString = newString.replace("{","");
-        newString = newString.replace("string", "");
-        newString = newString.replaceFirst(":", "");
-        newString = newString.replace("\"", "");
-        System.out.println(newString);
-        Map<String, String> properties = Splitter.on(",").withKeyValueSeparator(":").split(newString);
-        System.out.println(properties.get("username"));
+    public void saveObjectData(@PathVariable("username") String username, @RequestBody Object object) {
+        System.out.println(username);
+        System.out.println(object);
+
+        //        String newString = object.replace("}", "");
+//        newString = newString.replace("{","");
+//        newString = newString.replace("string", "");
+//        newString = newString.replaceFirst(":", "");
+//        newString = newString.replace("\"", "");
+//        System.out.println(newString);
+//        Map<String, String> properties = Splitter.on(",").withKeyValueSeparator(":").split(newString);
     }
 }
