@@ -66,7 +66,6 @@ export default function Map() {
     lat: lat,
     lng: lng,
   };
-  console.log(centerCurrnet);
 
   // Setting current possition end
   const { isLoaded, loadError } = useLoadScript({

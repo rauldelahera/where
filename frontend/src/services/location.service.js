@@ -6,7 +6,7 @@ const currentUser = AuthService.getCurrentUser();
 
 const API_URL = "http://localhost:8080/api/location/";
 
-const locationService = (objectName, latitude, longitude) => {
+const addingLocation = (objectName, latitude, longitude) => {
   return axios.post(
     API_URL + currentUser.username + "/add",
     {
@@ -18,4 +18,4 @@ const locationService = (objectName, latitude, longitude) => {
   );
 };
 
-export default locationService;
+export default addingLocation;
