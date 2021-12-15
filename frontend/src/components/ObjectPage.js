@@ -10,15 +10,14 @@ import addingObject from "../services/object.service";
 import "../formstyle.css";
 import ObjectForm from "./ObjectForm";
 
-
 const ObjectPage = () => {
   const user = AuthService.getCurrentUser();
 
   return (
     <div className="map">
-    <div className="see-form">
-    <ObjectForm/>
-    </div>
+      <div className="see-form">
+        <ObjectForm />
+      </div>
     </div>
   );
 };

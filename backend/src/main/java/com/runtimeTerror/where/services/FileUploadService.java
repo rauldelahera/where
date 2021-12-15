@@ -3,6 +3,7 @@ package com.runtimeTerror.where.services;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.lang.GeoLocation;
+
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.GpsDirectory;
 import com.runtimeTerror.where.bucket.BucketName;

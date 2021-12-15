@@ -11,7 +11,7 @@ const deleteLocation = (objectName) => {
     `http://localhost:8080/api/location/${currentUser.username}/delete`,
     {
       data: { objectName: objectName },
-      headers: { Authorization: authHeader() },
+      headers: authHeader(),
     }
   );
 };

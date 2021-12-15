@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/location")
 public class LocationController {
