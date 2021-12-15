@@ -27,6 +27,7 @@ export default function Form() {
     fetchData();
   }, []);
   // Getting Marks From DB and API END
+  // Delete marks from form START
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -47,24 +48,8 @@ export default function Form() {
   const handleDelete = ({ target }) => {
     let response = target.value;
     let array = response.split(",");
-    console.log(array);
-    console.log(
-      parseFloat(array[0]),
-      array[1],
-      array[2],
-      parseFloat(array[3]),
-      parseFloat(array[4])
-    );
 
-    deleteLocation(
-      parseFloat(array[0]),
-      array[1],
-      array[2],
-      parseFloat(array[3]),
-      parseFloat(array[4])
-    );
-
-    console.log(target.value);
+    deleteLocation(array[2]);
   };
 
   return (
