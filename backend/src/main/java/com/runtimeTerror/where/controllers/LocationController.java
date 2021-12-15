@@ -51,16 +51,10 @@ public class LocationController {
         locationService.deleteLocationData(existingLocation);
     }
 
-//    @GetMapping("/{username}/get")
-//    public ResponseEntity<Location> get(@PathVariable String username) {
-//        try {
-//            Location location = locationService.getLocationData(username);
-//            return new ResponseEntity<Location>(location, HttpStatus.OK);
-//        } catch (NoSuchElementException e) {
-//            return new ResponseEntity<Location>(HttpStatus.NOT_FOUND);
-//        }
-//
-//    }
+    @GetMapping("/{username}/get")
+    public List<Location> get(@PathVariable String username) {
+      return  locationService.getLocationData(username);
+    }
 
 
 

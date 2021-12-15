@@ -5,6 +5,8 @@ import com.runtimeTerror.where.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LocationService {
 
@@ -23,9 +25,8 @@ public class LocationService {
         locationRepository.deleteById(location.getId());
     }
 
-//    public Location getLocationData(Location location){
-//        String username = location.getUsername();
-//        return locationRepository.findByUsername(username).get(0);
-//    }
+    public List<Location> getLocationData(String username){
+        return locationRepository.findByUsername(username);
+    }
 
 }
