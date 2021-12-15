@@ -1,0 +1,50 @@
+
+/* body {
+  background-color: #34495e;
+} */
+
+/* .container {
+  width: 510px;
+  margin: 20px auto;
+} */
+/* 
+.plate.jpeg {
+  height: 800px;
+  width: 200px;
+} */
+
+.licenseplate {
+  color: #333;
+  background-color: rgb(255, 225, 57);
+	background-image: url("../img/plate2.jpeg");
+  background-repeat: no-repeat;
+  background-size: 510px 120px;
+  
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 80px;
+  line-height: 110px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  
+  padding-left: 70px;
+  padding-bottom: 5px;
+  
+  width: 510px;
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 15px;
+  outline: none;
+  
+  /* &::placeholder {
+    color: #eee;
+  } */
+}
+
+.emojistyle {
+font-size: 100px;
+}
+
+.emojistylesmall {
+  /* party, picnic needed to be smaller as they show up too big*/
+  font-size: 75px;
+}

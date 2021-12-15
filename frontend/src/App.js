@@ -11,6 +11,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardAdmin from "./components/BoardAdmin";
+import Objects from "./components/Objects";
 
 // import AuthVerify from "./common/AuthVerify";
 import EventBus from "./common/EventBus";
@@ -72,6 +73,14 @@ const App = () => {
                 </Link>
               </li>
             )}
+
+          {currentUser && (
+          <li className="nav-item">
+                <Link to={"/objects"} className="nav-link">
+                  objects.
+                </Link>
+              </li>
+              )}
           </div>
 
           {currentUser ? (
@@ -112,6 +121,7 @@ const App = () => {
             <Route exact path="/profile" component={Profile} />
             <Route path="/map" component={BoardUser} />
             <Route path="/admin" component={BoardAdmin} />
+            <Route path="/objects" component={Objects} />
           </Switch>
         </div>
 
