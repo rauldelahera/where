@@ -1,23 +1,20 @@
 package com.runtimeTerror.where.controllers;
 
-import com.amazonaws.services.identitymanagement.model.UserDetail;
-import com.runtimeTerror.where.models.User;
 import com.runtimeTerror.where.repository.UserRepository;
 import com.runtimeTerror.where.services.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("api/fileupload")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class FileUpload {
 
     private final FileUploadService fileUploadService;
@@ -30,14 +27,6 @@ public class FileUpload {
         this.fileUploadService = fileUploadService;
     }
 
-//    @GetMapping
-//    public Long getUserProfile() {
-//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User user = userRepository.findByUsername(userDetails.getUsername())
-//                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetails.getUsername()));
-//        return user.getId();
-//    }
-
     @PostMapping(
             path = "{id}/image/upload",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
@@ -48,8 +37,22 @@ public class FileUpload {
         fileUploadService.uploadUserProfileImage(id, file);
     }
 
+    @PostMapping(
+            path = "{username}/imagelocation/upload/{objectName}",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void uploadUserLocationImage(@PathVariable("username") String username,
+                                       @PathVariable("objectName") String objectName,
+                                       @RequestParam("file") MultipartFile file){
+        System.out.println(objectName);
+        fileUploadService.uploadUserLocationImage(username, objectName, file);
+    }
+
+
     @GetMapping("{userProfileId}/image/download")
     public byte[] downloadUserProfileImage(@PathVariable("userProfileId") Long id) {
         return fileUploadService.downloadUserProfileImage(id);
     }
+
 }

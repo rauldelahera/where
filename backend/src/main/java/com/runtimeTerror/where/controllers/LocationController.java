@@ -37,10 +37,7 @@ public class LocationController {
     @PostMapping("/{username}/add")
     public void saveLocationData(@PathVariable("username") String username,
                                  @RequestBody Location location) {
-        Location newLocation = new Location(location.getUsername(), location.getObjectName(),
-                location.getLatitude(), location.getLongitude());
-        newLocation.setUsername(username);
-        locationService.saveLocationData(newLocation);
+        locationService.saveLocationData(username, location);
     }
 
     @DeleteMapping("/{username}/delete")

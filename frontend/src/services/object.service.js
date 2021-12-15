@@ -4,18 +4,17 @@ import authHeader from "./auth-header";
 
 const currentUser = AuthService.getCurrentUser();
 
-const API_URL = "http://localhost:8080/api/location/";
+const API_URL = "http://localhost:8080/api/object/";
 
-const addingLocation = (objectName, latitude, longitude) => {
+const addingObjects = (objectName, objectType) => {
   return axios.post(
     API_URL + currentUser.username + "/add",
     {
-      objectName,
-      latitude,
-      longitude,
+      objectName, 
+      objectType
     },
     { headers: authHeader() }
   );
 };
 
-export default addingLocation;
+export default addingObjects;

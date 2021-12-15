@@ -3,6 +3,7 @@ package com.runtimeTerror.where.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Optional;
 
 @Entity
 @Table( name= "locations",
@@ -30,6 +31,17 @@ public class Location {
     @Size(max = 30)
     private Double latitude;
 
+    @Size(max = 300)
+    private String locationImageLink;
+
+    public Location(String username, String objectName, String filename, Double latitude, Double longitude) {
+        this.username = username;
+        this.objectName = objectName;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.locationImageLink = filename;
+    }
+
     public Location(String username, String objectName, Double longitude, Double latitude) {
         this.username = username;
         this.objectName = objectName;
@@ -41,9 +53,15 @@ public class Location {
 
     }
 
-    public Long getId() {
-        return id;
+    public void setLocationImageLink(String filename) {
+        this.locationImageLink = filename;
     }
+
+    public Optional<String> getLocationImageLink() {
+        return Optional.ofNullable(locationImageLink);
+    }
+
+    public Long getId() { return id; }
 
     public String getObjectName() {
         return objectName;
