@@ -7,10 +7,14 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("api/fileupload")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class FileUpload {
 
     private final FileUploadService fileUploadService;
@@ -34,17 +38,21 @@ public class FileUpload {
     }
 
     @PostMapping(
-            path = "{id}/location/upload",
+            path = "{username}/imagelocation/upload/{objectName}",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public void uploadLocationImage(@PathVariable("id") Long id,
+    public void uploadUserLocationImage(@PathVariable("username") String username,
+                                       @PathVariable("objectName") String objectName,
                                        @RequestParam("file") MultipartFile file){
-        fileUploadService.uploadLocationImage(id, file);
+        System.out.println(objectName);
+        fileUploadService.uploadUserLocationImage(username, objectName, file);
     }
+
 
     @GetMapping("{userProfileId}/image/download")
     public byte[] downloadUserProfileImage(@PathVariable("userProfileId") Long id) {
         return fileUploadService.downloadUserProfileImage(id);
     }
+
 }

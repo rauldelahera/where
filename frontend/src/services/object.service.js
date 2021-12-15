@@ -17,11 +17,4 @@ const addingObjects = (objectName, objectType) => {
   );
 };
 
-const getObjects = () => {
-  return axios.get(
-    API_URL + currentUser.username + "/get",
-    { headers: authHeader() }
-  )
-}
-
 export default addingObjects;

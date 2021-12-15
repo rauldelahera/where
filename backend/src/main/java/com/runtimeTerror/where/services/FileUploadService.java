@@ -42,13 +42,21 @@ public class FileUploadService  {
         return userRepository.findUserById(id);
     }
 
+    List<Location> getLocations(String username) {
+        return locationService.findByUsername(username);
+    }
+
+    User getUserbyUsername(String username) {
+        return userRepository.findUserByUsername(username);
+    }
+
     public void uploadUserProfileImage(Long id, MultipartFile file) {
         isFileEmpty(file);
         isImage(file);
         User user = getUserProfile(id);
-        try {
-            extractGPSFromMeta(user, file);
-        } catch (Exception e) {}
+//        try {
+//            extractGPSFromMeta(user, file);
+//        } catch (Exception e) {}
         Map<String, String> metadata = extractMetaData(file);
         String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), user.getId());
         String filename = String.format("%s-%s", UUID.randomUUID(), file.getOriginalFilename());
@@ -77,14 +85,14 @@ public class FileUploadService  {
         }
     }
 
-    private void extractGPSFromMeta(User user, MultipartFile file) throws IOException, ImageProcessingException {
+    private void extractGPSFromMeta(User user, String objectName, String filename, MultipartFile file) throws IOException, ImageProcessingException {
         Metadata metadata = ImageMetadataReader.readMetadata(file.getInputStream());
         GpsDirectory gpsDirectory = metadata.getFirstDirectoryOfType(GpsDirectory.class);
         GeoLocation location = gpsDirectory.getGeoLocation();
         String username = user.getUsername();
         double lat = location.getLatitude();
         double lng = location.getLongitude();
-        Location newLocation = new Location(username, " ", lat, lng);
+        Location newLocation = new Location(username, objectName, filename, lat, lng);
         locationService.saveLocationData(username, newLocation);
         }
 
@@ -118,13 +126,36 @@ public class FileUploadService  {
                 .orElse(new byte[0]);
     }
 
-
-//    private User getUserProfileorThrow(Long id) {
-//        return User
-//                .getUserProfile(id)
-//                .stream()
-//                .filter(userProfile -> userProfile.getUserProfileId().equals(userProfileID))
-//                .findFirst()
-//                .orElseThrow(() -> new IllegalStateException(String.format("User profile %s not found", userProfileID)));
+//    public byte[] downloadLocationImage(String username) {
+//        List<Location> list = getLocations(username);
+//        User user = getUserbyUsername(username);
+//        String path = String.format("%s/%s",
+//                BucketName.PROFILE_IMAGE.getBucketName(),
+//                user.getId());
+//        return list.stream().
+//                .map(key -> fileStore.download(path, key))
+//                .orElse(new byte[0]);
 //    }
+
+
+    public String uploadUserLocationImage(String username, String objectName, MultipartFile file) {
+        isFileEmpty(file);
+        isImage(file);
+        User user = getUserbyUsername(username);
+        Map<String, String> metadata = extractMetaData(file);
+        String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), user.getId());
+        String filename = String.format("%s-%s", UUID.randomUUID(), file.getOriginalFilename());
+        String fullpath = String.format("%s%s.%s/%s/%s", "https://", BucketName.PROFILE_IMAGE.getBucketName(),
+                "s3.eu-west-2.amazonaws.com", user.getId(), filename);
+        try {
+            fileStore.save(path, filename, Optional.of(metadata), file.getInputStream());
+            try {
+                extractGPSFromMeta(user, objectName, fullpath, file);
+            } catch (Exception e) { return "your photo has no GPS data.";}
+            userRepository.save(user);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+        return "success.";
+    }
 }

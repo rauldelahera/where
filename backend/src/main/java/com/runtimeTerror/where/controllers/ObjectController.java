@@ -29,6 +29,5 @@ public class ObjectController {
     @PostMapping("{username}/add")
     public void saveObjectData(@PathVariable("username") String username, @RequestBody Object object) {
         objectService.saveObject(username, object);
-
     }
 }

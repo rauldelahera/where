@@ -13,7 +13,7 @@ export default function ObjectForm() {
         console.log(objectName);
         let objectType = data.objectType;
         console.log(objectType);
-      addingObjects(objectName, objectType);
+        addingObjects(objectName, objectType);
     };
   
     return (
