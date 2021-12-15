@@ -1,3 +1,4 @@
+import bear from '../img/bear.svg'
 import React, { useState, useEffect } from "react";
 
 import {
@@ -101,11 +102,7 @@ export default function Map() {
           center={centerCurrnet}
         >
           <Marker
-            // icon="https://www.robotwoods.com/dev/misc/bluecircle.png"
-            icon={{
-              url: horse,
-              scaledSize: new window.google.maps.Size(20, 20),
-            }}
+            icon={bear}
             position={centerCurrnet}
           />
           {markers.map((x) => (

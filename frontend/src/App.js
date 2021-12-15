@@ -12,6 +12,7 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardAdmin from "./components/BoardAdmin";
 import ObjectPage from "./components/ObjectPage";
+import Objects from "./components/Objects";
 
 // import AuthVerify from "./common/AuthVerify";
 import EventBus from "./common/EventBus";
