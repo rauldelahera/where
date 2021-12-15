@@ -40,7 +40,7 @@ export default function Form() {
   let latAfterState = parseFloat(inputs.lat);
 
   const handleSubmit = (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     addingLocation(titleAfterState, latAfterState, lngAfterState);
     setInputs({});
   };
