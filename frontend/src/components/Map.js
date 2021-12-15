@@ -13,6 +13,9 @@ import mapStyles from "../mapStyles";
 import axios from "axios";
 import AuthService from "../services/auth.service";
 import authHeader from "../services/auth-header";
+import pin from "../img/128.png";
+import horse from "../img/256.png";
+
 const currentUser = AuthService.getCurrentUser();
 
 const libraries = ["places"];
@@ -44,8 +47,6 @@ export default function Map() {
 
     fetchData();
   }, []);
-
-  markers.map((x) => console.log(x.objectName));
 
   // Setting current possition start
   const [lat, setLat] = useState(null);
@@ -97,31 +98,27 @@ export default function Map() {
           center={centerCurrnet}
         >
           <Marker
-            icon="https://www.robotwoods.com/dev/misc/bluecircle.png"
+            // icon="https://www.robotwoods.com/dev/misc/bluecircle.png"
+            icon={{
+              url: horse,
+              scaledSize: new window.google.maps.Size(20, 20),
+            }}
             position={centerCurrnet}
           />
           {markers.map((x) => (
             <Marker
+              icon={{
+                url: pin,
+                scaledSize: new window.google.maps.Size(50, 50),
+              }}
               position={{ lat: x.latitude, lng: x.longitude }}
+              animation={window.google.maps.Animation.DROP}
               key={x.id}
               onClick={() => {
                 setSelected(x);
               }}
             />
           ))}
-          {/* {selected.map((y) => (
-            <InfoWindow
-              position={{ lat: y.latitude, lng: y.longitude }}
-              onCloseClick={() => {
-                setSelected(null);
-              }}
-            >
-              <div>
-                <h4>You left here!</h4>
-                <p>{y.objectName}</p>
-              </div>
-            </InfoWindow>
-          ))} */}
 
           {selected ? (
             <InfoWindow
