@@ -1,10 +1,14 @@
 import React from "react";
-
 import "./Objects.css";
 
-export default function Objects() {
 
+      
+export default function Objects() {
+      
     return (
+<div className="map">
+    <div className="see-form">
+        <div className="see-map">
 <div className="objects">
 
                 <form autocomplete="off">
@@ -14,9 +18,8 @@ export default function Objects() {
                 </div>
                 <input type="submit" />
                 </label>
-                </form>
-        
-  
+                </form> 
+
 <div className="col-md-12">
             <form>
                 <label>Tent Location:
@@ -71,5 +74,7 @@ export default function Objects() {
         
     </div> 
 </div>
-
+</div>
+</div>
+</div>
 )}

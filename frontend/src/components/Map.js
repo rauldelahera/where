@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import bear from '../img/bear.svg'
 import {
   GoogleMap,
   InfoWindow,
@@ -124,7 +125,7 @@ export default function Map() {
           center={centerCurrnet}
         >
           <Marker
-            icon="https://www.robotwoods.com/dev/misc/bluecircle.png"
+            icon={bear}
             position={centerCurrnet}
           />
 
