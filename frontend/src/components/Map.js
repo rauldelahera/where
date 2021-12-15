@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import {
   GoogleMap,
   InfoWindow,
@@ -11,6 +12,15 @@ import { formatRelative } from "date-fns";
 import "@reach/combobox/styles.css";
 import mapStyles from "../mapStyles";
 
+// Getting Marks From DB and API START
+import axios from "axios";
+import AuthService from "../services/auth.service";
+import authHeader from "../services/auth-header";
+import pin from "../img/128.png";
+import horse from "../img/256.png";
+
+const currentUser = AuthService.getCurrentUser();
+
 const libraries = ["places"];
 const mapContainerStyle = {
   height: "73vh",
@@ -21,12 +31,26 @@ const options = {
   disableDefaultUI: true,
   zoomControl: true,
 };
-const center = {
-  lat: 51.5007,
-  lng: -0.1246,
-};
 
 export default function Map() {
+  // Getting Marks From DB and API START
+  const [markers, setMarkers] = React.useState([]);
+  const [selected, setSelected] = React.useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(
+        `http://localhost:8080/api/location/${currentUser.username}/get`,
+        {
+          headers: authHeader(),
+        }
+      );
+      setMarkers(result.data);
+    };
+
+    fetchData();
+  }, []);
+
   // Setting current possition start
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
@@ -60,29 +84,6 @@ export default function Map() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-  const [markers, setMarkers] = React.useState([]);
-  const [selected, setSelected] = React.useState(null);
-
-  const onMapClick = React.useCallback((e) => {
-    setMarkers((current) => [
-      ...current,
-      {
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
-        time: new Date(),
-      },
-    ]);
-  }, []);
-
-  const mapRef = React.useRef();
-  const onMapLoad = React.useCallback((map) => {
-    mapRef.current = map;
-  }, []);
-
-  const panTo = React.useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
-  }, []);
 
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
@@ -91,62 +92,47 @@ export default function Map() {
     <>
       <p>{status}</p>
       <div className="map-main">
-        {/* <h1 className="logo_name">
-        Where?{" "}
-        <span role="img" aria-label="tent">
-          🐘
-        </span>
-      </h1> */}
-
-        {/* <Locate panTo={panTo} /> */}
-        {/* <Search panTo={panTo} />  */}
-
         <GoogleMap
           id="map"
           mapContainerStyle={mapContainerStyle}
           zoom={14}
           options={options}
-          onClick={onMapClick}
-          onLoad={onMapLoad}
           onLoad={getLocation}
           center={centerCurrnet}
         >
           <Marker
-            icon="https://www.robotwoods.com/dev/misc/bluecircle.png"
+            // icon="https://www.robotwoods.com/dev/misc/bluecircle.png"
+            icon={{
+              url: horse,
+              scaledSize: new window.google.maps.Size(20, 20),
+            }}
             position={centerCurrnet}
           />
-
-          {markers.map((marker) => (
+          {markers.map((x) => (
             <Marker
-              key={`${marker.lat}-${marker.lng}`}
-              position={{ lat: marker.lat, lng: marker.lng }}
-              onClick={() => {
-                setSelected(marker);
+              icon={{
+                url: pin,
+                scaledSize: new window.google.maps.Size(50, 50),
               }}
-              // icon={{
-              //   url: `../img/bear.svg`,
-              //   origin: new window.google.maps.Point(0, 0),
-              //   anchor: new window.google.maps.Point(15, 15),
-              //   scaledSize: new window.google.maps.Size(30, 30),
-              // }}
+              position={{ lat: x.latitude, lng: x.longitude }}
+              animation={window.google.maps.Animation.DROP}
+              key={x.id}
+              onClick={() => {
+                setSelected(x);
+              }}
             />
           ))}
 
           {selected ? (
             <InfoWindow
-              position={{ lat: selected.lat, lng: selected.lng }}
+              position={{ lat: selected.latitude, lng: selected.longitude }}
               onCloseClick={() => {
                 setSelected(null);
               }}
             >
               <div>
-                <h2>
-                  {/* <span role="img" aria-label="bear">
-                  🐘
-                </span>{" "} */}
-                  Alert
-                </h2>
-                <p>Item Left {formatRelative(selected.time, new Date())}</p>
+                <h6>You left here:</h6>
+                <p>{selected.objectName}</p>
               </div>
             </InfoWindow>
           ) : null}
@@ -154,4 +140,4 @@ export default function Map() {
       </div>
     </>
   );
-              }
+}

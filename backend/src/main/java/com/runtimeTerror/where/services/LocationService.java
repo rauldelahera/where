@@ -25,7 +25,7 @@ public class LocationService {
     public void deleteLocationData(Location existingLocation) {
         String username = existingLocation.getUsername();
         String objectName = existingLocation.getObjectName();
-        Location location = locationRepository.findByUsername(username).get(0);
+        Location location = locationRepository.findByUsernameAndObjectName(username, objectName).get(0);
         locationRepository.deleteById(location.getId());
     }
 

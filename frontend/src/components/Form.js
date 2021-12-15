@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useCallback, useState, useEffect, useReducer } from "react";
 
 import axios from "axios";
-import { useEffect, useState, useCallback } from "react";
 import addingLocation from "../services/location.service";
 import {useDropzone} from "react-dropzone";
 import AuthService from "../services/auth.service";
 import authHeader from "../services/auth-header";
 import getObjects from "../services/object.service";
 
+import deleteLocation from "../services/delete.services";
+
+const currentUser = AuthService.getCurrentUser();
 
 export default function Form() {
   const [objects, setObjects] = React.useState([]);
@@ -87,6 +89,13 @@ export default function Form() {
     setValues((values) => ({ values, value }));
   };
 
+  const handleDelete = ({ target }) => {
+    let response = target.value;
+    let array = response.split(",");
+
+    deleteLocation(array[2]);
+  };
+
   return (
     <div className="form-padding">
       <form>
@@ -100,28 +109,25 @@ export default function Form() {
       </form>
       <Dropzone {...currentUser}/>
       <div className="marks">
-        <ul>
-          <li>
-            {markers.map((mark) => {
-              return <div>{mark.objectName}
-              <img src={mark}/>
-              </div>
-            })}
-            <h5>First Mark:</h5>
-          </li>
-          <li>
-            <h5>Second Mark:</h5>
-          </li>
-          <li>
-            <h5>Third Mark:</h5>
-          </li>
-          <li>
-            <h5>Fourth Mark:</h5>
-          </li>
-          <li>
-            <h5>Fift Mark:</h5>
-          </li>
-        </ul>
+        {markers.map((mark) => (
+          <ul>
+            <li>
+              <h5>Mark title: {mark.objectName}</h5>
+              <button
+                value={[
+                  mark.id,
+                  mark.username,
+                  mark.objectName,
+                  mark.longitude,
+                  mark.latitude,
+                ]}
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+            </li>
+          </ul>
+        ))}
       </div>
     </div>
   );

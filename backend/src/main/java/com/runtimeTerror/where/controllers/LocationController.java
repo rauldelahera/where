@@ -50,7 +50,7 @@ public class LocationController {
 
     @GetMapping("/{username}/get")
     public List<Location> get(@PathVariable String username) {
-        return  locationService.getLocationData(username);
+      return  locationService.getLocationData(username);
     }
 
 
