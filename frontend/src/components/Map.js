@@ -1,28 +1,23 @@
-import React, { useState } from "react";
 import bear from '../img/bear.svg'
+import React, { useState, useEffect } from "react";
+
 import {
   GoogleMap,
   InfoWindow,
   Marker,
   useLoadScript,
 } from "@react-google-maps/api";
-// import usePlacesAutocomplete, {
-//   getGeocode,
-//   getLatLng,
-// } from "use-places-autocomplete";
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxList,
-//   ComboboxOption,
-//   ComboboxPopover,
-// } from "@reach/combobox";
-import { formatRelative } from "date-fns";
-
 import "@reach/combobox/styles.css";
 import mapStyles from "../mapStyles";
 
-// import compas from "../img/2.svg";
+// Getting Marks From DB and API START
+import axios from "axios";
+import AuthService from "../services/auth.service";
+import authHeader from "../services/auth-header";
+import pin from "../img/128.png";
+import horse from "../img/256.png";
+
+const currentUser = AuthService.getCurrentUser();
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -34,12 +29,26 @@ const options = {
   disableDefaultUI: true,
   zoomControl: true,
 };
-const center = {
-  lat: 51.5007,
-  lng: -0.1246,
-};
 
 export default function Map() {
+  // Getting Marks From DB and API START
+  const [markers, setMarkers] = React.useState([]);
+  const [selected, setSelected] = React.useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(
+        `http://localhost:8080/api/location/${currentUser.username}/get`,
+        {
+          headers: authHeader(),
+        }
+      );
+      setMarkers(result.data);
+    };
+
+    fetchData();
+  }, []);
+
   // Setting current possition start
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
@@ -73,29 +82,6 @@ export default function Map() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-  const [markers, setMarkers] = React.useState([]);
-  const [selected, setSelected] = React.useState(null);
-
-  const onMapClick = React.useCallback((e) => {
-    setMarkers((current) => [
-      ...current,
-      {
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
-        time: new Date(),
-      },
-    ]);
-  }, []);
-
-  const mapRef = React.useRef();
-  const onMapLoad = React.useCallback((map) => {
-    mapRef.current = map;
-  }, []);
-
-  const panTo = React.useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
-  }, []);
 
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
@@ -104,23 +90,11 @@ export default function Map() {
     <>
       <p>{status}</p>
       <div className="map-main">
-        {/* <h1 className="logo_name">
-        Where?{" "}
-        <span role="img" aria-label="tent">
-          🐘
-        </span>
-      </h1> */}
-
-        {/* <Locate panTo={panTo} /> */}
-        {/* <Search panTo={panTo} />  */}
-
         <GoogleMap
           id="map"
           mapContainerStyle={mapContainerStyle}
           zoom={14}
           options={options}
-          onClick={onMapClick}
-          onLoad={onMapLoad}
           onLoad={getLocation}
           center={centerCurrnet}
         >
@@ -128,38 +102,31 @@ export default function Map() {
             icon={bear}
             position={centerCurrnet}
           />
-
-          {markers.map((marker) => (
+          {markers.map((x) => (
             <Marker
-              key={`${marker.lat}-${marker.lng}`}
-              position={{ lat: marker.lat, lng: marker.lng }}
-              onClick={() => {
-                setSelected(marker);
+              icon={{
+                url: pin,
+                scaledSize: new window.google.maps.Size(50, 50),
               }}
-              // icon={{
-              //   url: `../img/bear.svg`,
-              //   origin: new window.google.maps.Point(0, 0),
-              //   anchor: new window.google.maps.Point(15, 15),
-              //   scaledSize: new window.google.maps.Size(30, 30),
-              // }}
+              position={{ lat: x.latitude, lng: x.longitude }}
+              animation={window.google.maps.Animation.DROP}
+              key={x.id}
+              onClick={() => {
+                setSelected(x);
+              }}
             />
           ))}
 
           {selected ? (
             <InfoWindow
-              position={{ lat: selected.lat, lng: selected.lng }}
+              position={{ lat: selected.latitude, lng: selected.longitude }}
               onCloseClick={() => {
                 setSelected(null);
               }}
             >
               <div>
-                <h2>
-                  {/* <span role="img" aria-label="bear">
-                  🐘
-                </span>{" "} */}
-                  Alert
-                </h2>
-                <p>Item Left {formatRelative(selected.time, new Date())}</p>
+                <h6>You left here:</h6>
+                <p>{selected.objectName}</p>
               </div>
             </InfoWindow>
           ) : null}
@@ -168,79 +135,3 @@ export default function Map() {
     </>
   );
 }
-
-// function Locate({ panTo }) {
-//   return (
-//     <button
-//       className="locate"
-//       onClick={() => {
-//         navigator.geolocation.getCurrentPosition(
-//           (position) => {
-//             panTo({
-//               lat: position.coords.latitude,
-//               lng: position.coords.longitude,
-//             });
-//           },
-//           () => null
-//         );
-//       }}
-//     >
-//       <img src={compas} alt="compass" />
-//     </button>
-//   );
-// }
-
-// function Search({ panTo }) {
-//   const {
-//     ready,
-//     value,
-//     suggestions: { status, data },
-//     setValue,
-//     clearSuggestions,
-//   } = usePlacesAutocomplete({
-//     requestOptions: {
-//       location: { lat: () => 43.6532, lng: () => -79.3832 },
-//       radius: 100 * 1000,
-//     },
-//   });
-
-//   // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
-
-//   const handleInput = (e) => {
-//     setValue(e.target.value);
-//   };
-
-//   const handleSelect = async (address) => {
-//     setValue(address, false);
-//     clearSuggestions();
-
-//     try {
-//       const results = await getGeocode({ address });
-//       const { lat, lng } = await getLatLng(results[0]);
-//       panTo({ lat, lng });
-//     } catch (error) {
-//       console.log("😱 Error: ", error);
-//     }
-//   };
-
-//   return (
-//     <div className="search">
-//       <Combobox onSelect={handleSelect}>
-//         <ComboboxInput
-//           value={value}
-//           onChange={handleInput}
-//           disabled={!ready}
-//           placeholder="Search your location"
-//         />
-//         <ComboboxPopover>
-//           <ComboboxList>
-//             {status === "OK" &&
-//               data.map(({ id, description }) => (
-//                 <ComboboxOption key={id} value={description} />
-//               ))}
-//           </ComboboxList>
-//         </ComboboxPopover>
-//       </Combobox>
-//     </div>
-//   );
-// }

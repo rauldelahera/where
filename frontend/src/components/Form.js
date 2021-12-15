@@ -1,8 +1,33 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import addingLocation from "../services/location.service";
+import axios from "axios";
+import AuthService from "../services/auth.service";
+import authHeader from "../services/auth-header";
+import deleteLocation from "../services/delete.services";
+
+const currentUser = AuthService.getCurrentUser();
+
 export default function Form() {
   const [inputs, setInputs] = useState({});
+
+  // Getting Marks From DB and API START
+  const [markers, setMarkers] = React.useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(
+        `http://localhost:8080/api/location/${currentUser.username}/get`,
+        {
+          headers: authHeader(),
+        }
+      );
+      setMarkers(result.data);
+    };
+
+    fetchData();
+  }, []);
+  // Getting Marks From DB and API END
+  // Delete marks from form START
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -13,12 +38,18 @@ export default function Form() {
   let titleAfterState = inputs.title;
   let lngAfterState = parseFloat(inputs.lng);
   let latAfterState = parseFloat(inputs.lat);
-  console.log(titleAfterState, lngAfterState, latAfterState);
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     addingLocation(titleAfterState, latAfterState, lngAfterState);
     setInputs({});
+  };
+
+  const handleDelete = ({ target }) => {
+    let response = target.value;
+    let array = response.split(",");
+
+    deleteLocation(array[2]);
   };
 
   return (
@@ -55,24 +86,25 @@ export default function Form() {
       </form>
 
       <div className="marks">
-        <ul>
-          <li>
-            {" "}
-            <h5>First Mark:</h5>
-          </li>
-          <li>
-            <h5>Second Mark:</h5>
-          </li>
-          <li>
-            <h5>Third Mark:</h5>
-          </li>
-          <li>
-            <h5>Fourth Mark:</h5>
-          </li>
-          <li>
-            <h5>Fift Mark:</h5>
-          </li>
-        </ul>
+        {markers.map((mark) => (
+          <ul>
+            <li>
+              <h5>Mark title: {mark.objectName}</h5>
+              <button
+                value={[
+                  mark.id,
+                  mark.username,
+                  mark.objectName,
+                  mark.longitude,
+                  mark.latitude,
+                ]}
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+            </li>
+          </ul>
+        ))}
       </div>
     </div>
   );
