@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ObjectRepository extends JpaRepository<Object, Long> {
     List<Object> findAllByUsername(String username);
+
+
 }

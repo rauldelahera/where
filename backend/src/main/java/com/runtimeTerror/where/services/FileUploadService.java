@@ -126,18 +126,6 @@ public class FileUploadService  {
                 .orElse(new byte[0]);
     }
 
-//    public byte[] downloadLocationImage(String username) {
-//        List<Location> list = getLocations(username);
-//        User user = getUserbyUsername(username);
-//        String path = String.format("%s/%s",
-//                BucketName.PROFILE_IMAGE.getBucketName(),
-//                user.getId());
-//        return list.stream().
-//                .map(key -> fileStore.download(path, key))
-//                .orElse(new byte[0]);
-//    }
-
-
     public String uploadUserLocationImage(String username, String objectName, MultipartFile file) {
         isFileEmpty(file);
         isImage(file);

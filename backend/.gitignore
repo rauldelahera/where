@@ -5,6 +5,9 @@ target/
 !**/src/test/**/target/
 backend/.env.local
 
+backend/src/main/java/com/runtimeTerror/where/services/WebClientService.java
+backend/src/main/java/com/runtimeTerror/where/services/WebClientService
+
 .env.local
 ### STS ###
 .apt_generated

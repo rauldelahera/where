@@ -6,12 +6,13 @@ const currentUser = AuthService.getCurrentUser();
 
 const API_URL = "http://localhost:8080/api/object/";
 
-const addingObjects = (objectName, objectType) => {
+const addingObjects = (objectName, objectType, registrationNumber) => {
   return axios.post(
     API_URL + currentUser.username + "/add",
     {
       objectName, 
-      objectType
+      objectType,
+      registrationNumber
     },
     { headers: authHeader() }
   );

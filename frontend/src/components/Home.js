@@ -29,8 +29,7 @@ const Home = () => {
       <div className="home">
         <div className="home-1">
           <h2 className="home-1-inner">
-            WDILI is an App for... Someone needs to write some cool stuff here
-            I'm not good with creative writing
+          No memory? No problem! WDILI is an App for.. the times you think Where Did I Leave It? Upload photos of your item to set geo tagged pins with the exact location! Whether that’s your car, your tent or just a gathering place. Free up space in your brain for important stuff, like attending UFO conventions, leave the remembering to us!
           </h2>
         </div>
         <div className="home-2">
