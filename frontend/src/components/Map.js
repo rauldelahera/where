@@ -1,5 +1,6 @@
-import bear from '../img/bear.svg'
+import bear from "../img/bear.svg";
 import React, { useState, useEffect } from "react";
+import man from "../img/man.svg";
 
 import {
   GoogleMap,
@@ -7,8 +8,6 @@ import {
   Marker,
   useLoadScript,
 } from "@react-google-maps/api";
-
-import { formatRelative } from "date-fns";
 
 import "@reach/combobox/styles.css";
 import mapStyles from "../mapStyles";
@@ -18,7 +17,6 @@ import axios from "axios";
 import AuthService from "../services/auth.service";
 import authHeader from "../services/auth-header";
 import pin from "../img/128.png";
-import horse from "../img/256.png";
 
 const currentUser = AuthService.getCurrentUser();
 
@@ -102,7 +100,10 @@ export default function Map() {
           center={centerCurrnet}
         >
           <Marker
-            icon={bear}
+            icon={{
+              url: man,
+              scaledSize: new window.google.maps.Size(50, 50),
+            }}
             position={centerCurrnet}
           />
           {markers.map((x) => (

@@ -19,6 +19,8 @@ export default function Form() {
 
   const [values, setValues] = React.useState();
 
+  const [status, setStatus] = useState(null);
+
   const currentUser = AuthService.getCurrentUser();
 
   useEffect(() => {
@@ -52,6 +54,7 @@ export default function Form() {
     const onDrop = useCallback((acceptedFiles) => {
       const file = acceptedFiles[0];
       console.log(file);
+      setStatus("Uploading...");
       const formData = new FormData();
       formData.append("file", file);
       axios
@@ -66,9 +69,12 @@ export default function Form() {
           }
         )
         .then(() => {
-          console.log("file uploaded successfully");
+          setStatus("File uploaded successfully!");
+          console.log("File uploaded successfully!");
+          refreshPage();
         })
         .catch((err) => {
+          setStatus("Error Uploading!");
           console.log(err);
         });
     }, []);
@@ -84,9 +90,14 @@ export default function Form() {
         ) : (
           <p>Drag 'n' drop your images here, or click to select them</p>
         )}
+        <div>{status}</div>
       </div>
     );
   }
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -99,6 +110,7 @@ export default function Form() {
     let array = response.split(",");
 
     deleteLocation(array[2]);
+    refreshPage();
   };
 
   return (
@@ -114,6 +126,7 @@ export default function Form() {
         </select>
       </form>
       <Dropzone {...currentUser} />
+
       <div className="marks">
         {markers.map((mark) => (
           <ul>
