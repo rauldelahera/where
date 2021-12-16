@@ -1,4 +1,3 @@
-import bear from "../img/bear.svg";
 import React, { useState, useEffect } from "react";
 import man from "../img/man.svg";
 
@@ -17,6 +16,7 @@ import axios from "axios";
 import AuthService from "../services/auth.service";
 import authHeader from "../services/auth-header";
 import pin from "../img/128.png";
+import car from "../img/car.png";
 
 const currentUser = AuthService.getCurrentUser();
 

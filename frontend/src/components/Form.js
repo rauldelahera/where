@@ -120,7 +120,9 @@ export default function Form() {
           <option>choose an object.</option>
           {objects.map((object) => {
             return (
-              <option value={object.objectName}>{object.objectName}</option>
+              <>
+                <option value={object.objectName}>{object.objectName}</option>
+              </>
             );
           })}
         </select>
