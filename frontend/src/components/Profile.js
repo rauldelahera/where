@@ -71,7 +71,7 @@ const Profile = () => {
         <div className="profile-1">
           <p>
             <strong>Your security Token:</strong>{" "}
-            {currentUser.accessToken}
+            {/* {currentUser.accessToken} */}
             {/* {currentUser.accessToken.substring(0, 20)} ...{" "}
             {currentUser.accessToken.substr(
               currentUser.accessToken.length - 20

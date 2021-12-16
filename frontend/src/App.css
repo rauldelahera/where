@@ -244,6 +244,7 @@ label {
 }
 .home-1-inner {
   padding: 40px 40px;
+  font-size: 20px;
 }
 .home-2 {
   grid-column: 3/4;

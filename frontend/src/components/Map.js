@@ -130,6 +130,7 @@ export default function Map() {
               <div>
                 <h6>You left here:</h6>
                 <p>{selected.objectName}</p>
+                <img src={selected.locationImageLink} style={{width:"150px"}}/>
               </div>
             </InfoWindow>
           ) : null}
