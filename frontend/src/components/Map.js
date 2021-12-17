@@ -1,4 +1,4 @@
-import bear from '../img/bear.svg'
+import man from "../img/final_man.png";
 import React, { useState, useEffect } from "react";
 
 import {
@@ -102,7 +102,10 @@ export default function Map() {
           center={centerCurrnet}
         >
           <Marker
-            icon={bear}
+            icon={{
+              url: man,
+              scaledSize: new window.google.maps.Size(50, 50),
+            }}
             position={centerCurrnet}
           />
           {markers.map((x) => (
@@ -130,7 +133,10 @@ export default function Map() {
               <div>
                 <h6>You left here:</h6>
                 <p>{selected.objectName}</p>
-                <img src={selected.locationImageLink} style={{width:"150px"}}/>
+                <img
+                  src={selected.locationImageLink}
+                  style={{ width: "150px" }}
+                />
               </div>
             </InfoWindow>
           ) : null}

@@ -59,12 +59,40 @@ public class Object {
 
     private String monthOfFirstRegistration;
 
+    private String artEndDate;
+
+    private String euroStatus;
+
+    private String revenueWeight;
+
+    public String getRevenueWeight() {
+        return revenueWeight;
+    }
+
+    public void setRevenueWeight(String revenueWeight) {
+        this.revenueWeight = revenueWeight;
+    }
+
     public Object(String username, String objectName) {
         this.username = username;
         this.objectName = objectName;
     }
 
+    public String getEuroStatus() {
+        return euroStatus;
+    }
 
+    public void setEuroStatus(String euroStatus) {
+        this.euroStatus = euroStatus;
+    }
+
+    public String getArtEndDate() {
+        return artEndDate;
+    }
+
+    public void setArtEndDate(String artEndDate) {
+        this.artEndDate = artEndDate;
+    }
 
     public Object(String username, String objectName, String objectType) {
     }
