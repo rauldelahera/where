@@ -13,17 +13,16 @@ import "../formstyle.css";
 import ObjectForm from "./ObjectForm";
 import queryDVLA from "../services/dvla-service";
 
-
 const ObjectPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm();  
-  
+    formState: { errors },
+  } = useForm();
+
   const [objects, setObjects] = useState();
   const [storeObject, setObject] = useState();
-  
+
   const currentUser = AuthService.getCurrentUser();
 
   useEffect(() => {
@@ -52,9 +51,7 @@ const ObjectPage = () => {
   //   )
   // }
 
-  return (
-    <ObjectForm/>
-  );
+  return <ObjectForm />;
 };
 
 export default ObjectPage;

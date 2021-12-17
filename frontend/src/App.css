@@ -164,7 +164,7 @@ label {
   color: black;
 }
 .p-2 {
-  background-color: #c4b454;
+  background-color: #c3c3c0;
   height: 5rem;
 }
 .footer-images {
@@ -195,7 +195,7 @@ label {
   display: none;
 }
 .map {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   display: grid;
   grid-template-columns: 3fr 0.2fr 3fr;
 }
@@ -214,7 +214,7 @@ label {
   padding: 40px 40px;
 }
 .form-padding {
-  padding: 40px 40px;
+  padding: 10px 10px;
   border: 1px dashed #f7a9e4;
 }
 .map-main {
@@ -266,11 +266,14 @@ label {
 }
 .home-3-inner {
   padding: 40px 40px;
+  font-size: 28px;
+  text-shadow: 2px 2px rgba(128, 128, 128, 0.32);
 }
 
 /* Profile Page */
 .jumbotron {
   padding: 1rem 1rem;
+  margin-bottom: 1rem;
 }
 .profile {
   display: grid;
@@ -292,4 +295,107 @@ label {
   box-shadow: 10px 10px 5px #aaaaaa81;
   border-radius: 3rem;
   border: 1px solid rgba(0, 0, 0, 0.163);
+}
+
+/* Profile image  */
+.profile-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.dropzone {
+  border: 1px solid #c4b454;
+  cursor: pointer;
+  background-color: #f3ed01;
+  border-radius: 5px;
+  text-align: center;
+  padding: 7px 7px 0px 7px;
+  color: black;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.dropzone:hover {
+  background-color: #c4b454;
+  border: 1px solid black;
+}
+
+.profile-1 {
+  background-color: #f7a9e4;
+}
+
+.see-form {
+  background-color: #f7a9e4;
+}
+.see-map {
+  background-color: #f7a9e4;
+}
+.the-tuff-mate {
+  font-weight: 100;
+}
+
+.obj-button {
+  background-color: #f3ed01;
+}
+
+.map-image-drop {
+  margin-top: 5px;
+  background-color: #f3ed01;
+  border-radius: 5px;
+  border: 1px solid #c3c3c0;
+  padding: 10px 10px 0px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.map-image-drop:hover {
+  background-color: #c4b454;
+  border: 1px solid black;
+}
+
+.select-map {
+  padding-right: 10.8rem;
+}
+
+.select-object {
+  padding-right: 20rem;
+}
+
+.map-delete {
+  margin: 0 0 0 0;
+  background-color: #f3ed01;
+  border: 1px solid #c3c3c0;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  padding: 0 26%;
+  letter-spacing: 0.35rem;
+  font-size: 14px;
+}
+
+.map-delete:hover {
+  background-color: #c4b454;
+  border: 1px solid black;
+}
+
+.map-marks {
+  font-weight: 100;
+}
+
+.sad-face-1 {
+  display: grid;
+  grid-template-columns: 5fr 2fr 4fr;
+}
+
+.sad-face-2 {
+  grid-column: 2/3;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #c3c3c0;
+  background-color: #f3ed01;
+  border-radius: 50%;
 }
